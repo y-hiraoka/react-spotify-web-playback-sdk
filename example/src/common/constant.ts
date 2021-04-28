@@ -24,13 +24,16 @@ export const SPOTIFY_SCOPES = [
   "user-read-private",
 ] as const;
 
-isString(process.env.SPOTIFY_CLIENT_ID)
+isString(process.env.SPOTIFY_CLIENT_ID);
 export const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 
-isString(process.env.SPOTIFY_CLIENT_SECRET)
+isString(process.env.SPOTIFY_CLIENT_SECRET);
 export const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 
-export const SPOTIFY_REDIRECT_URI = `http://localhost:3000/player`;
+export const SPOTIFY_REDIRECT_URI =
+  process.env.NODE_ENV !== "production"
+    ? `http://localhost:3000/player`
+    : "https://react-spotify-web-playback-sdk.vercel.app/player";
 
 export const SPOTIFY_AUTHORIZE_URL = "https://accounts.spotify.com/authorize";
 
