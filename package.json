@@ -4,14 +4,12 @@
   "description": "React Wrapper of Spotify Web Playback SDK",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "exports": "./dist/index.modern.js",
   "module": "dist/index.module.js",
   "unpkg": "dist/index.umd.js",
   "source": "src/index.ts",
   "scripts": {
     "format": "prettier --write 'src/**'",
-    "build": "rimraf dist && microbundle --no-compress --external react --globals react=React --strict --jsx React.createElement --no-generate-types",
-    "dev": "microbundle watch --no-compress --external react --globals react=React --strict --jsx React.createElement",
+    "build": "rimraf dist && microbundle --no-compress --external react --globals react=React --strict --jsx React.createElement -f es,cjs,umd",
     "test": "jest",
     "prepare": "husky install"
   },
