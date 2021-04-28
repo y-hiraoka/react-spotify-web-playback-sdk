@@ -1,0 +1,62 @@
+{
+  "name": "react-spotify-web-playback-sdk",
+  "version": "0.0.2",
+  "description": "React Wrapper of Spotify Web Playback SDK",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": "./dist/index.modern.js",
+  "module": "dist/index.module.js",
+  "unpkg": "dist/index.umd.js",
+  "source": "src/index.ts",
+  "scripts": {
+    "format": "prettier --write 'src/**'",
+    "build": "rimraf dist && microbundle --no-compress --external react --globals react=React --strict --jsx React.createElement --no-generate-types",
+    "dev": "microbundle watch --no-compress --external react --globals react=React --strict --jsx React.createElement",
+    "test": "jest",
+    "prepare": "husky install"
+  },
+  "keywords": [
+    "react",
+    "spotify",
+    "web-playback-sdk"
+  ],
+  "files": [
+    "dist"
+  ],
+  "author": "https://github.com/y-hiraoka",
+  "repository": {
+    "url": "https://github.com/y-hiraoka/react-spotify-web-playback-sdk"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/react-hooks": "^5.1.2",
+    "@types/jest": "^26.0.22",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "husky": "^6.0.0",
+    "jest": "^26.6.3",
+    "lint-staged": "^10.5.4",
+    "microbundle": "^0.13.0",
+    "prettier": "^2.2.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.5.5",
+    "typescript": "^4.2.4"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
+  },
+  "lint-staged": {
+    "src/*.**": "prettier --write"
+  },
+  "dependencies": {
+    "@types/spotify-web-playback-sdk": "^0.1.8"
+  }
+}
