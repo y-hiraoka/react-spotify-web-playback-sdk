@@ -31,10 +31,10 @@ export const StateConsumer: React.VFC<{ access_token: string }> = memo(
 
     return (
       <div className={styles.root}>
-        <StateSummary summary="webPlaybackSDKReady" state={webPlaybackSDKReady} />
-        <StateSummary summary="playbackState" state={playbackState} />
-        <StateSummary summary="playerDevice" state={playerDevice} />
-        <StateSummary summary="errorState" state={errorState} />
+        <StateSummary summary="useWebPlaybackSDKReady" state={webPlaybackSDKReady} />
+        <StateSummary summary="usePlaybackState" state={playbackState} />
+        <StateSummary summary="usePlayerDevice" state={playerDevice} />
+        <StateSummary summary="useErrorState" state={errorState} />
       </div>
     );
   },
