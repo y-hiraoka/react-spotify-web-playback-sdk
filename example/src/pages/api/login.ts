@@ -20,16 +20,17 @@ const handler: NextApiHandler = (req, res) => {
       state: state,
     });
 
+    const secure = !req.headers.host?.includes("localhost");
     setCookie({ res }, "state", state, {
       maxAge: 3600000,
-      secure: true,
+      secure: secure,
       httpOnly: true,
       path: "/",
     });
 
     const url = `${SPOTIFY_AUTHORIZE_URL}?${redirectParams.toString()}`;
 
-    res.redirect(url)
+    res.redirect(url);
   } else {
     res.status(405).send("Method Not Allowed");
   }

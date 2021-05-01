@@ -1,0 +1,31 @@
+.root {
+  display: flex;
+  align-items: center;
+  border-radius: 100px;
+  background-color: var(--c-spotify-white);
+  height: 40px;
+  padding: 6px 24px 6px 12px;
+  color: var(--c-spotify-black);
+}
+
+.root[data-focused="true"] {
+  box-shadow: 0 0 0 2px var(--c-outline);
+}
+
+.root svg {
+  color: var(--c-spotify-gray);
+  margin-right: 8px;
+  transition: all 0.2s ease;
+}
+
+.root[data-focused="true"] svg {
+  color: var(--c-spotify-green);
+}
+
+.root input {
+  flex: 1;
+  color: var(--c-spotify-black);
+  border: none;
+  outline: none;
+  font-size: 14px;
+}

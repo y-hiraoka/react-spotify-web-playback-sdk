@@ -1,0 +1,55 @@
+.header {
+  padding: 8px 0 16px 0;
+  border-bottom: 1px solid var(--c-spotify-gray);
+}
+
+.headerTop {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.headerLeft {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.smallLogo {
+  height: 48px;
+}
+
+.deviceNameTop {
+  flex: 1;
+  margin-left: 24px;
+  max-width: 360px;
+}
+
+.headerBottom {
+  display: none;
+}
+
+.githubLink {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+@media (max-width: 650px) {
+  .header {
+    margin: 0 16px;
+  }
+
+  .headerBottom {
+    display: block;
+    margin-top: 16px;
+  }
+
+  .deviceNameTop {
+    display: none;
+  }
+
+  .player {
+    padding: 0 16px;
+  }
+}

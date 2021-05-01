@@ -1,0 +1,3 @@
+.root > :not(:first-child) {
+  margin-top: 32px;
+}

@@ -1,0 +1,15 @@
+.root {
+  padding: 20px 0;
+  width: 100%;
+  overflow: scroll;
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.playerButtons {
+  padding-right: 20px;
+}
+
+.stateConsumer {
+  padding-left: 20px;
+}

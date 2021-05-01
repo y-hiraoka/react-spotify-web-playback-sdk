@@ -1,20 +1,16 @@
 import { useCallback, useState } from "react";
 import { GetServerSideProps } from "next";
 import nookies from "nookies";
-import {
-  WebPlaybackSDK,
-  usePlaybackState,
-  useSpotifyPlayer,
-  usePlayerDevice,
-  useErrorState,
-  useWebPlaybackSDKReady,
-} from "react-spotify-web-playback-sdk";
+import { WebPlaybackSDK } from "react-spotify-web-playback-sdk";
 import {
   SPOTIFY_API_TOKEN_URL,
   SPOTIFY_CLIENT_ID,
   SPOTIFY_CLIENT_SECRET,
   SPOTIFY_REDIRECT_URI,
 } from "../common/constant";
+import styles from "../styles/player.module.css";
+import { PlayerHeader } from "../components/PlayerHeader";
+import { PlayerContent } from "../components/PlayerContent";
 
 type Props = { token: TokenObject };
 
@@ -27,148 +23,25 @@ const Player: React.VFC<Props> = ({ token }) => {
   const [deviceName, setDeviceName] = useState("Spotify Player on Next.js");
 
   return (
-    <div>
-      <input value={deviceName} onChange={e => setDeviceName(e.target.value)} />
-      <WebPlaybackSDK
-        deviceName={deviceName}
-        getOAuthToken={getOAuthToken}
-        connectOnInitialized={true}
-        playbackStateAutoUpdate
-        volume={0.5}>
-        <PlayerButton />
-        <StateViewer />
-      </WebPlaybackSDK>
-    </div>
+    <WebPlaybackSDK
+      deviceName={deviceName}
+      getOAuthToken={getOAuthToken}
+      connectOnInitialized={true}
+      playbackStateAutoUpdate
+      volume={0.5}>
+      <div className={styles.root}>
+        <div className={styles.header}>
+          <PlayerHeader deviceName={deviceName} deviceNameOnChange={setDeviceName} />
+        </div>
+        <main className={styles.player}>
+          <PlayerContent access_token={token.access_token} />
+        </main>
+      </div>
+    </WebPlaybackSDK>
   );
 };
 
-const PlayerButton: React.VFC = () => {
-  const player = useSpotifyPlayer();
-
-  if (player === null) return null;
-
-  return (
-    <div>
-      <div>
-        <button onClick={() => player.previousTrack()}>player.previousTrack</button>
-        <button onClick={() => player.togglePlay()}>player.togglePlay</button>
-        <button onClick={() => player.nextTrack()}>player.nextTrack</button>
-        <button onClick={() => player.pause()}>player.pause</button>
-        <button onClick={() => player.resume()}>player.resume</button>
-      </div>
-      <div>
-        <button onClick={() => player.connect()}>player.connect</button>
-        <button onClick={() => player.disconnect()}>player.disconnect</button>
-      </div>
-    </div>
-  );
-};
-
-const StateViewer: React.VFC = () => {
-  const [show, setShow] = useState({
-    playbackState: true,
-    playerDevice: true,
-    errorState: true,
-    webPlaybackSDKReady: true,
-  });
-
-  const onChecked = (key: keyof typeof show) => (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setShow(prevState => ({
-      ...prevState,
-      [key]: e.target.checked,
-    }));
-  };
-
-  const playbackState = usePlaybackState();
-  const playerDevice = usePlayerDevice();
-  const errorState = useErrorState();
-  const webPlaybackSDKReady = useWebPlaybackSDKReady();
-
-  return (
-    <div>
-      <div>
-        <label>
-          webPlaybackSDKReady
-          <input
-            type="checkbox"
-            checked={show.webPlaybackSDKReady}
-            onChange={onChecked("webPlaybackSDKReady")}
-          />
-        </label>
-        <label>
-          playbackState
-          <input
-            type="checkbox"
-            checked={show.playbackState}
-            onChange={onChecked("playbackState")}
-          />
-        </label>
-        <label>
-          playerDevice
-          <input
-            type="checkbox"
-            checked={show.playerDevice}
-            onChange={onChecked("playerDevice")}
-          />
-        </label>
-        <label>
-          errorState
-          <input
-            type="checkbox"
-            checked={show.errorState}
-            onChange={onChecked("errorState")}
-          />
-        </label>
-      </div>
-      {show.webPlaybackSDKReady && (
-        <div>
-          <h2>
-            <code>webPlaybackSDKReady</code>
-          </h2>
-          <div>
-            <pre>{JSON.stringify(webPlaybackSDKReady, null, 2)}</pre>
-          </div>
-        </div>
-      )}
-      {show.playbackState && (
-        <div>
-          <h2>
-            <code>playbackState</code>
-          </h2>
-          <div>
-            <pre>{JSON.stringify(playbackState, null, 2)}</pre>
-          </div>
-        </div>
-      )}
-      {show.playerDevice && (
-        <div>
-          <h2>
-            <code>playerDevice</code>
-          </h2>
-          <div>
-            <pre>{JSON.stringify(playerDevice, null, 2)}</pre>
-          </div>
-        </div>
-      )}
-      {show.errorState && (
-        <div>
-          <h2>
-            <code>errorState</code>
-          </h2>
-          <div>
-            <pre>{JSON.stringify(errorState, null, 2)}</pre>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-type Params = {};
-
-export const getServerSideProps: GetServerSideProps<Props, Params> = async ({
+export const getServerSideProps: GetServerSideProps<Props> = async ({
   query,
   req,
 }) => {

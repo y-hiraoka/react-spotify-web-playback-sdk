@@ -2,8 +2,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
@@ -13,4 +13,26 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+*:focus {
+  outline-color: var(--c-outline);
+}
+
+:root {
+  --c-spotify-lightgreen: #1ed760;
+  --c-spotify-green: #1db954;
+  --c-spotify-white: #ffffff;
+  --c-spotify-black: #191414;
+  --c-spotify-gray: #282828;
+  --c-outline: rgba(29, 185, 84, .8);
+}
+
+body {
+  background-color: var(--c-spotify-black);
+  color: var(--c-spotify-white);
+}
+
+code {
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
 }

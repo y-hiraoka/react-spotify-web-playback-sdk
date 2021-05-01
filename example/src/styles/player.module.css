@@ -1,0 +1,22 @@
+.root {
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.header {
+  padding: 0 40px;
+}
+
+.player {
+  padding: 0 40px;
+}
+
+@media (max-width: 650px) {
+  .header {
+    padding: 0 16px;
+  }
+
+  .player {
+    padding: 0 16px;
+  }
+}

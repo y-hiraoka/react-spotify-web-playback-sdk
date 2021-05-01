@@ -1,0 +1,18 @@
+.root summary {
+  padding: 8px 0px 8px 0px;
+  white-space: nowrap;
+}
+
+.root summary::marker {
+  margin-right: 24px;
+}
+
+.root summary:hover {
+  cursor: pointer;
+}
+
+.root pre {
+  border-radius: 4px;
+  background-color: var(--c-spotify-gray);
+  padding: 12px;
+}
