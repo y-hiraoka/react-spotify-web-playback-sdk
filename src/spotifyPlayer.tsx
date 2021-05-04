@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { MUST_BE_WRAPPED_MESSAGE } from "./constant";
+import { useEffectTimeout } from "./useEffectTimeout";
 import { useWebPlaybackSDKReady } from "./webPlaybackSDKReady";
 
 const PlayerContext = createContext<Spotify.SpotifyPlayer | null | undefined>(
@@ -47,7 +48,7 @@ export const SpotifyPlayerProvider: React.FC<ProviderProps> = ({
 
   // The first effect is ignored.
   // Because the first `deviceName` will be passed to Spotify.Player constructor.
-  useEffect(() => {
+  useEffectTimeout(() => {
     player?.setName(deviceName);
   }, [deviceName]);
 

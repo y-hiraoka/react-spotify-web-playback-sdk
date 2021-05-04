@@ -40,7 +40,7 @@ test("useSpotifyPlayer is not wrapped with Provider", () => {
 });
 
 test("In case web playback SDK is not loaded yet", () => {
-  mockUseWebPlaybackSDKReady.mockReturnValue(false)
+  mockUseWebPlaybackSDKReady.mockReturnValue(false);
   const { result } = renderHook(() => useSpotifyPlayer(), {
     initialProps: {
       deviceName: "SpotifyPlayer test device",
@@ -83,6 +83,7 @@ test("SpotifyPlayer connects on initialized.", () => {
   expect(mockPlayerConnect.mock.calls.length).toBe(1);
 });
 
+jest.useFakeTimers();
 test("Update deviceName after initialized", () => {
   const { rerender } = renderHook(() => useSpotifyPlayer(), {
     initialProps: {
@@ -94,6 +95,8 @@ test("Update deviceName after initialized", () => {
     wrapper: SpotifyPlayerProvider,
   });
 
+  jest.advanceTimersByTime(1000);
+
   expect(mockPlayerSetName.mock.calls.length).toBe(0);
 
   rerender({
@@ -102,6 +105,8 @@ test("Update deviceName after initialized", () => {
     getOAuthToken: () => {},
     volume: 1,
   });
+
+  jest.advanceTimersByTime(1000);
 
   expect(mockPlayerSetName.mock.calls.length).toBe(1);
   expect(mockPlayerSetName.mock.calls[0][0]).toBe("deviceName updated");
