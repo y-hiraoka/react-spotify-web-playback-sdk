@@ -8,7 +8,7 @@
   "unpkg": "dist/index.umd.js",
   "source": "src/index.ts",
   "scripts": {
-    "format": "prettier --write 'src/**'",
+    "format": "prettier --write '**/*.{js,jsx,ts,tsx}'",
     "build": "rimraf dist && microbundle --no-compress --external react --globals react=React --strict --jsx React.createElement -f es,cjs,umd",
     "test": "jest",
     "prepare": "husky install"
@@ -52,7 +52,7 @@
     }
   },
   "lint-staged": {
-    "src/*.**": "prettier --write"
+    "*.{js,jsx,ts,tsx}": "prettier --write"
   },
   "dependencies": {
     "@types/spotify-web-playback-sdk": "^0.1.8"
