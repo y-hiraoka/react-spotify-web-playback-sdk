@@ -1,6 +1,6 @@
 {
   "name": "react-spotify-web-playback-sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React Wrapper of Spotify Web Playback SDK",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
