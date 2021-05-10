@@ -39,6 +39,8 @@ export const SpotifyPlayerProvider: React.FC<ProviderProps> = ({
         if (connectOnInitialized) {
           player.connect();
         }
+
+        return () => player.disconnect();
       }
     },
     // `deviceName` and `volume` are intentionally not passed.

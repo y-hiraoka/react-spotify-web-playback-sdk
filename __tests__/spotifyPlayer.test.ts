@@ -11,11 +11,12 @@ import { SpotifyPlayerProvider, useSpotifyPlayer } from "../src/spotifyPlayer";
 
 type MockSpotifyPlayer = Pick<
   Spotify.SpotifyPlayer,
-  "connect" | "togglePlay" | "setName" | "setVolume"
+  "connect" | "disconnect" | "togglePlay" | "setName" | "setVolume"
 >;
 
 // https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
 const mockPlayerConnect = jest.fn();
+const mockPlayerDisconnect = jest.fn();
 const mockPlayerTogglePlay = jest.fn();
 const mockPlayerSetName = jest.fn();
 const mockPlayerSetVolume = jest.fn();
@@ -25,6 +26,7 @@ Object.defineProperty(window, "Spotify", {
     Player: jest.fn<MockSpotifyPlayer, [Spotify.PlayerInit]>(arg => {
       return {
         connect: mockPlayerConnect,
+        disconnect: mockPlayerDisconnect,
         togglePlay: mockPlayerTogglePlay,
         setName: mockPlayerSetName,
         setVolume: mockPlayerSetVolume,
