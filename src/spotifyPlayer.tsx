@@ -3,9 +3,7 @@ import { MUST_BE_WRAPPED_MESSAGE } from "./constant";
 import { useEffectTimeout } from "./useEffectTimeout";
 import { useWebPlaybackSDKReady } from "./webPlaybackSDKReady";
 
-const PlayerContext = createContext<Spotify.SpotifyPlayer | null | undefined>(
-  undefined,
-);
+const PlayerContext = createContext<Spotify.Player | null | undefined>(undefined);
 
 type ProviderProps = {
   deviceName: Spotify.PlayerInit["name"];
@@ -21,7 +19,7 @@ export const SpotifyPlayerProvider: React.FC<ProviderProps> = ({
   volume,
   connectOnInitialized,
 }) => {
-  const [player, setPlayer] = useState<Spotify.SpotifyPlayer | null>(null);
+  const [player, setPlayer] = useState<Spotify.Player | null>(null);
   const webPlaybackSDKReady = useWebPlaybackSDKReady();
 
   // create Spotify.Player instance.

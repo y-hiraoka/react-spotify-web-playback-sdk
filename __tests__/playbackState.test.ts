@@ -10,7 +10,7 @@ import { MUST_BE_WRAPPED_MESSAGE } from "../src/constant";
 import { PlaybackStateProvider, usePlaybackState } from "../src/playbackState";
 
 type MockSpotifyPlayer = Pick<
-  Spotify.SpotifyPlayer,
+  Spotify.Player,
   "addListener" | "removeListener" | "getCurrentState"
 >;
 

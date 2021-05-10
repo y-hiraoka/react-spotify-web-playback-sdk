@@ -10,7 +10,7 @@ import { MUST_BE_WRAPPED_MESSAGE } from "../src/constant";
 import { SpotifyPlayerProvider, useSpotifyPlayer } from "../src/spotifyPlayer";
 
 type MockSpotifyPlayer = Pick<
-  Spotify.SpotifyPlayer,
+  Spotify.Player,
   "connect" | "disconnect" | "togglePlay" | "setName" | "setVolume"
 >;
 

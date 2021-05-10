@@ -9,10 +9,7 @@ import { act, renderHook } from "@testing-library/react-hooks";
 import { MUST_BE_WRAPPED_MESSAGE } from "../src/constant";
 import { ErrorStateProvider, useErrorState, ErrorState } from "../src/errorState";
 
-type MockSpotifyPlayer = Pick<
-  Spotify.SpotifyPlayer,
-  "addListener" | "removeListener"
->;
+type MockSpotifyPlayer = Pick<Spotify.Player, "addListener" | "removeListener">;
 
 let addedInitializationErrorListener:
   | ((state: ErrorState) => void)

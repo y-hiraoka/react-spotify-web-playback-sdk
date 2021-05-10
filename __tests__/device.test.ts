@@ -9,10 +9,7 @@ import { act, renderHook } from "@testing-library/react-hooks";
 import { MUST_BE_WRAPPED_MESSAGE } from "../src/constant";
 import { DeviceProvider, usePlayerDevice, PlayerDevice } from "../src/device";
 
-type MockSpotifyPlayer = Pick<
-  Spotify.SpotifyPlayer,
-  "addListener" | "removeListener"
->;
+type MockSpotifyPlayer = Pick<Spotify.Player, "addListener" | "removeListener">;
 
 let addedReadyListener: ((state: PlayerDevice) => void) | undefined = undefined;
 let addedNotReadyListener: ((state: PlayerDevice) => void) | undefined = undefined;

@@ -55,6 +55,6 @@
     "*.{js,jsx,ts,tsx}": "prettier --write"
   },
   "dependencies": {
-    "@types/spotify-web-playback-sdk": "^0.1.8"
+    "@types/spotify-web-playback-sdk": "^0.1.9"
   }
 }
