@@ -27,7 +27,6 @@ const Player: React.VFC<Props> = ({ token }) => {
       deviceName={deviceName}
       getOAuthToken={getOAuthToken}
       connectOnInitialized={true}
-      playbackStateAutoUpdate
       volume={0.5}>
       <div className={styles.root}>
         <div className={styles.header}>

@@ -10,7 +10,7 @@ import { StateSummary } from "./StateSummary";
 
 export const StateConsumer: React.VFC<{ access_token: string }> = memo(
   ({ access_token }) => {
-    const playbackState = usePlaybackState();
+    const playbackState = usePlaybackState(true, 100);
     const playerDevice = usePlayerDevice();
     const errorState = useErrorState();
     const webPlaybackSDKReady = useWebPlaybackSDKReady();
