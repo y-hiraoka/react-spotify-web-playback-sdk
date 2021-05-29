@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { MUST_BE_WRAPPED_MESSAGE } from "./constant";
-import { useSpotifyPlayer } from "./spotifyPlayer";
+import { useSpotifyPlayerRawInstance } from "./spotifyPlayer";
 
 export type ErrorState = Spotify.Error & { type: Spotify.ErrorTypes };
 
@@ -8,7 +8,7 @@ const ErrorStateContext = createContext<ErrorState | null | undefined>(undefined
 
 export const ErrorStateProvider: React.FC = ({ children }) => {
   const [errorState, setErrorState] = useState<ErrorState | null>(null);
-  const player = useSpotifyPlayer();
+  const player = useSpotifyPlayerRawInstance();
 
   useEffect(() => {
     if (player === null) return;

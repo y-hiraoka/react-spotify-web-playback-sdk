@@ -6,6 +6,7 @@ export { usePlayerDevice } from "./device";
 export { useErrorState } from "./errorState";
 
 import { WebPlaybackSDKProps } from "./webPlaybackSDK";
+import { SpotifyPlayer } from "./spotifyPlayer";
 import { PlayerDevice } from "./device";
 import { ErrorState } from "./errorState";
-export type { WebPlaybackSDKProps, PlayerDevice, ErrorState };
+export type { WebPlaybackSDKProps, SpotifyPlayer, PlayerDevice, ErrorState };

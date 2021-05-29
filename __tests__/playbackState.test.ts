@@ -1,7 +1,7 @@
 const mockUseSpotifyPlayer = jest.fn();
 jest.mock("../src/spotifyPlayer", () => {
   return {
-    useSpotifyPlayer: mockUseSpotifyPlayer,
+    useSpotifyPlayerRawInstance: mockUseSpotifyPlayer,
   };
 });
 
@@ -50,10 +50,6 @@ test("usePlaybackState is not wrapped with Provider", () => {
 test("In case useSpotifyPlayer returns null", () => {
   mockUseSpotifyPlayer.mockReturnValue(null);
   const { result } = renderHook(() => usePlaybackState(), {
-    initialProps: {
-      playbackStateAutoUpdate: true,
-      playbackStateUpdateDuration_ms: 1000,
-    },
     wrapper: PlaybackStateProvider,
   });
 
@@ -65,10 +61,6 @@ test("Add and remove eventLister for setPlaybackState.", () => {
   const mockPlaybackState = { paused: true };
 
   const { unmount, result } = renderHook(() => usePlaybackState(), {
-    initialProps: {
-      playbackStateAutoUpdate: true,
-      playbackStateUpdateDuration_ms: 1000,
-    },
     wrapper: PlaybackStateProvider,
   });
 
@@ -87,24 +79,15 @@ jest.useFakeTimers();
 test("playbackState is updated automatically.", async () => {
   // props.playbackStateAutoUpdate is false
   const { rerender, result, waitForNextUpdate } = renderHook(
-    () => usePlaybackState(),
-    {
-      initialProps: {
-        playbackStateAutoUpdate: false,
-        playbackStateUpdateDuration_ms: 1000,
-      },
-      wrapper: PlaybackStateProvider,
-    },
+    () => usePlaybackState(true, 1000),
+    { wrapper: PlaybackStateProvider },
   );
 
   expect(window.setInterval).toHaveBeenCalledTimes(0);
 
   // Spotify.Player instance is null
   mockUseSpotifyPlayer.mockReturnValue(null);
-  rerender({
-    playbackStateAutoUpdate: true,
-    playbackStateUpdateDuration_ms: 1000,
-  });
+  rerender();
 
   expect(window.setInterval).toHaveBeenCalledTimes(0);
 

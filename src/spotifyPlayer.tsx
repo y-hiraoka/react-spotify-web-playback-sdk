@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { MUST_BE_WRAPPED_MESSAGE } from "./constant";
 import { useEffectTimeout } from "./useEffectTimeout";
 import { useWebPlaybackSDKReady } from "./webPlaybackSDKReady";
@@ -61,7 +67,42 @@ export const SpotifyPlayerProvider: React.FC<ProviderProps> = ({
   return <PlayerContext.Provider value={player} children={children} />;
 };
 
-export function useSpotifyPlayer() {
+export type SpotifyPlayer = Omit<
+  Spotify.Player,
+  | "addListener"
+  | "on"
+  | "removeListener"
+  | "setName"
+  | "setVolume"
+  | "_options"
+  | "getVolume"
+>;
+
+export function useSpotifyPlayer(): SpotifyPlayer | null {
+  const value = useContext(PlayerContext);
+
+  if (value === undefined) throw new Error(MUST_BE_WRAPPED_MESSAGE);
+
+  const player = useMemo<SpotifyPlayer | null>(() => {
+    if (value === null) return null;
+
+    return {
+      connect: () => value.connect(),
+      disconnect: () => value.disconnect(),
+      getCurrentState: () => value.getCurrentState(),
+      nextTrack: () => value.nextTrack(),
+      pause: () => value.pause(),
+      previousTrack: () => value.previousTrack(),
+      resume: () => value.resume(),
+      seek: pos_ms => value.seek(pos_ms),
+      togglePlay: () => value.togglePlay(),
+    };
+  }, [value]);
+
+  return player;
+}
+
+export function useSpotifyPlayerRawInstance() {
   const value = useContext(PlayerContext);
 
   if (value === undefined) throw new Error(MUST_BE_WRAPPED_MESSAGE);

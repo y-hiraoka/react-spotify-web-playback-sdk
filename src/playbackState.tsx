@@ -1,26 +1,17 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { MUST_BE_WRAPPED_MESSAGE } from "./constant";
-import { useSpotifyPlayer } from "./spotifyPlayer";
+import { useSpotifyPlayerRawInstance } from "./spotifyPlayer";
 
 const PlaybackStateContext = createContext<Spotify.PlaybackState | null | undefined>(
   undefined,
 );
 
-type ProviderProps = {
-  playbackStateAutoUpdate: boolean;
-  playbackStateUpdateDuration_ms: number;
-};
-
-export const PlaybackStateProvider: React.FC<ProviderProps> = ({
-  children,
-  playbackStateAutoUpdate,
-  playbackStateUpdateDuration_ms,
-}) => {
+export const PlaybackStateProvider: React.FC = ({ children }) => {
   const [playbackState, setPlaybackState] = useState<Spotify.PlaybackState | null>(
     null,
   );
 
-  const player = useSpotifyPlayer();
+  const player = useSpotifyPlayerRawInstance();
 
   useEffect(() => {
     if (player === null) return;
@@ -34,35 +25,43 @@ export const PlaybackStateProvider: React.FC<ProviderProps> = ({
     return () => player.removeListener("player_state_changed", playerStateChanged);
   }, [player]);
 
-  // setup automatic playbackState updates
+  return <PlaybackStateContext.Provider value={playbackState} children={children} />;
+};
+
+export function usePlaybackState(interval?: false): Spotify.PlaybackState | null;
+export function usePlaybackState(
+  interval: true,
+  durationMS?: number,
+): Spotify.PlaybackState | null;
+export function usePlaybackState(
+  interval?: boolean,
+  durationMS = 1000,
+): Spotify.PlaybackState | null {
+  const fromContext = useContext(PlaybackStateContext);
+
+  if (fromContext === undefined) throw new Error(MUST_BE_WRAPPED_MESSAGE);
+
+  const [playbackState, setPlaybackState] = useState(fromContext);
+
+  const player = useSpotifyPlayerRawInstance();
+
+  useEffect(() => setPlaybackState(fromContext), [fromContext]);
+
   const playbackStateIsNull = playbackState === null;
   useEffect(() => {
-    if (!playbackStateAutoUpdate) return;
+    if (!interval) return;
     if (player === null) return;
     if (playbackStateIsNull) return;
+
     if (playbackState!.paused) return;
 
     const intervalId = window.setInterval(async () => {
       const newState = await player.getCurrentState();
       setPlaybackState(newState);
-    }, playbackStateUpdateDuration_ms);
+    }, durationMS);
 
     return () => window.clearInterval(intervalId);
-  }, [
-    playbackStateAutoUpdate,
-    player,
-    playbackStateIsNull,
-    playbackState?.paused,
-    playbackStateUpdateDuration_ms,
-  ]);
+  }, [interval, player, playbackStateIsNull, playbackState?.paused, durationMS]);
 
-  return <PlaybackStateContext.Provider value={playbackState} children={children} />;
-};
-
-export function usePlaybackState() {
-  const value = useContext(PlaybackStateContext);
-
-  if (value === undefined) throw new Error(MUST_BE_WRAPPED_MESSAGE);
-
-  return value;
+  return playbackState;
 }

@@ -11,8 +11,6 @@ export type WebPlaybackSDKProps = {
   getOAuthToken: Spotify.PlayerInit["getOAuthToken"];
   volume?: Spotify.PlayerInit["volume"];
   connectOnInitialized?: boolean;
-  playbackStateAutoUpdate?: boolean;
-  playbackStateUpdateDuration_ms?: number;
 };
 
 export const WebPlaybackSDK: React.FC<WebPlaybackSDKProps> = ({
@@ -21,8 +19,6 @@ export const WebPlaybackSDK: React.FC<WebPlaybackSDKProps> = ({
   getOAuthToken,
   volume,
   connectOnInitialized = true,
-  playbackStateAutoUpdate = true,
-  playbackStateUpdateDuration_ms = 1000,
 }) => {
   useEffect(() => {
     // load Web Playback SDK.
@@ -42,9 +38,7 @@ export const WebPlaybackSDK: React.FC<WebPlaybackSDKProps> = ({
         getOAuthToken={getOAuthToken}
         volume={volume}
         connectOnInitialized={connectOnInitialized}>
-        <PlaybackStateProvider
-          playbackStateAutoUpdate={playbackStateAutoUpdate}
-          playbackStateUpdateDuration_ms={playbackStateUpdateDuration_ms}>
+        <PlaybackStateProvider>
           <DeviceProvider>
             <ErrorStateProvider>{children}</ErrorStateProvider>
           </DeviceProvider>
