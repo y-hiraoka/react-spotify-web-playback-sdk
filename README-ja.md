@@ -106,14 +106,12 @@ SDK をラップした React コンポーネントです。これは React-Naiti
 
 #### `props`
 
-| prop name                        | type                                        | default value | description                                                                                                                                                          |
-| :------------------------------- | :------------------------------------------ | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `deviceName`                     | string                                      | (required)    | Spotify Connect プレイヤーの名前。                                                                                                                                   |
-| `getOAuthToken`                  | (callback: (token: string) => void) => void | (required)    | `player.connect()` を呼び出すとき、またはユーザーのアクセストークンの有効期限が切れたときに呼び出される関数。 `useCallback` によって**参照同一性を保証すべき**です。 |
-| `volume`                         | number                                      | 1             | ボリューム。0 から 1 の小数を指定します。                                                                                                                            |
-| `connectOnInitialized`           | boolean                                     | true          | 初期化と同時に接続をするか。                                                                                                                                         |
-| `playbackStateAutoUpdate`        | boolean                                     | true          | `playbackState` を自動で更新するか。                                                                                                                                 |
-| `playbackStateUpdateDuration_ms` | number                                      | 1000          | `playbackState` を自動更新する間隔。ミリ秒を指定します。 `playbackStateAutoUpdate` が `false` の場合は無視されます。                                                 |
+| prop name              | type                                        | default value | description                                                                                                                                                          |
+| :--------------------- | :------------------------------------------ | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `deviceName`           | string                                      | (required)    | Spotify Connect プレイヤーの名前。                                                                                                                                   |
+| `getOAuthToken`        | (callback: (token: string) => void) => void | (required)    | `player.connect()` を呼び出すとき、またはユーザーのアクセストークンの有効期限が切れたときに呼び出される関数。 `useCallback` によって**参照同一性を保証すべき**です。 |
+| `volume`               | number                                      | 1             | ボリューム。0 から 1 の小数を指定します。                                                                                                                            |
+| `connectOnInitialized` | boolean                                     | true          | 初期化と同時に接続をするか。                                                                                                                                         |
 
 #### 使用例
 
@@ -129,9 +127,7 @@ const MyPlayer = () => {
       deviceName="My Spotify App"
       getOAuthToken={getOAuthToken}
       volume={0.5}
-      connectOnInitialized={true}
-      playbackStateAutoUpdate={true}
-      playbackStateUpdateDuration_ms={500}>
+      connectOnInitialized={true}>
       <SomeComponentsUsingCustomHook />
     </WebPlaybackSDK>
   );
@@ -162,12 +158,23 @@ const MyPlayer = () => {
 
 ### `useSpotifyPlayer`
 
-Spotify.Player クラスのインスタンスを返すカスタムフックです。 Spotify.Player クラスが持つメソッドについては [Spotify for Developers のリファレンス](https://developer.spotify.com/documentation/web-playback-sdk/reference/#api-reference) を参照してください。
+`resume()` や `seek(pos)` などの プレイヤーを操作する関数を備えたオブジェクトを返すカスタムフックです。
 
 #### 型定義
 
 ```ts
-function useSpotifyPlayer(): Spotify.Player | null;
+type SpotifyPlayer = {
+  connect: () => Promise<boolean>;
+  disconnect: () => void;
+  getCurrentState: () => Promise<Spotify.PlaybackState | null>;
+  nextTrack: () => Promise<void>;
+  pause: () => Promise<void>;
+  previousTrack: () => Promise<void>;
+  resume: () => Promise<void>;
+  seek: (pos_ms: number) => Promise<void>;
+  togglePlay: () => Promise<void>;
+};
+function useSpotifyPlayer(): SpotifyPlayer | null;
 ```
 
 #### 使用例
@@ -191,10 +198,16 @@ const PauseResumeButton = () => {
 
 プレイヤーの再生状態を表すオブジェクトを取得するカスタムフックです。 オブジェクトが持つプロパティの詳細は[Spotify for Developers のリファレンス](https://developer.spotify.com/documentation/web-playback-sdk/reference/#objects) を参照してください。
 
+`interval` が `true` の場合、 `durationMS` で指定した間隔で再生中にステート更新が発生します。 `false` の場合でも、`SpotifyPlayer.pause` や `SpotifyPlayer.resume` によるステート更新は発生します。
+
 #### 型定義
 
 ```ts
-function usePlaybackState(): Spotify.PlaybackState | null;
+function usePlaybackState(interval?: false): Spotify.PlaybackState | null;
+function usePlaybackState(
+  interval: true,
+  durationMS?: number,
+): Spotify.PlaybackState | null;
 ```
 
 #### 使用例

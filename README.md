@@ -24,11 +24,11 @@ The plain SDK does not have a declarative API. So, when you use it in your React
 npm install react-spotify-web-playback-sdk
 ```
 
-### Set up SDK
+### `WebPlaybackSDK`
 
 Assume that you have the latest oauth token. Required scopes that the token have are `"streaming"`, `"user-read-email"` and `"user-read-private"`. You can also get an access token [here](https://developer.spotify.com/documentation/web-playback-sdk/quick-start).
 
-`WebPlaybackSDK` component is root of this library. So you must wrap any custom-hooks in this library with it.
+`WebPlaybackSDK` component is a root of this library. So you must wrap any custom-hooks in this library with it.
 
 ```tsx
 import { WebPlaybackSDK } from "react-spotify-web-playback-sdk";
@@ -91,14 +91,12 @@ The custom hooks included in the library will not work unless they are inside th
 
 #### `props`
 
-| prop name                        | type                                        | default value | description                                                                                                                                                 |
-| :------------------------------- | :------------------------------------------ | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `deviceName`                     | string                                      | (required)    | A name of Spotify Connect player.                                                                                                                           |
-| `getOAuthToken`                  | (callback: (token: string) => void) => void | (required)    | A function called when `player.connect()` is called, or when the user's access token expires. **Reference identity should be guaranteed** by `useCallback`. |
-| `volume`                         | number                                      | 1             | a value of volume. specified as a decimal number between 0 and 1.                                                                                           |
-| `connectOnInitialized`           | boolean                                     | true          | Whether to make a connection at the same time as initialization.                                                                                            |
-| `playbackStateAutoUpdate`        | boolean                                     | true          | Whether `playbackState` should be updated automatically.                                                                                                    |
-| `playbackStateUpdateDuration_ms` | number                                      | 1000          | The interval at which `playbackState` is automatically updated. Specify milliseconds. If `playbackStateAutoUpdate` is `false`, it will be ignored.          |
+| prop name              | type                                        | default value | description                                                                                                                                                 |
+| :--------------------- | :------------------------------------------ | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `deviceName`           | string                                      | (required)    | A name of Spotify Connect player.                                                                                                                           |
+| `getOAuthToken`        | (callback: (token: string) => void) => void | (required)    | A function called when `player.connect()` is called, or when the user's access token expires. **Reference identity should be guaranteed** by `useCallback`. |
+| `volume`               | number                                      | 1             | a value of volume. specified as a decimal number between 0 and 1.                                                                                           |
+| `connectOnInitialized` | boolean                                     | true          | Whether to make a connection at the same time as initialization.                                                                                            |
 
 #### usage
 
@@ -114,9 +112,7 @@ const MyPlayer = () => {
       deviceName="My Spotify App"
       getOAuthToken={getOAuthToken}
       volume={0.5}
-      connectOnInitialized={true}
-      playbackStateAutoUpdate={true}
-      playbackStateUpdateDuration_ms={500}>
+      connectOnInitialized={true}>
       <SomeComponentsUsingCustomHook />
     </WebPlaybackSDK>
   );
@@ -147,12 +143,23 @@ const MyPlayer = () => {
 
 ### `useSpotifyPlayer`
 
-A custom hook that returns an instance of the Spotify.Player class. If you want to know what methods the Player class has, please refer to [Spotify for Developers reference](<(https://developer.spotify.com/documentation/web-playback-sdk/reference/#api-reference)>).
+A custom hook that returns an object with functions to manipulate the player, such as `resume()` or `seek(pos)`.
 
 #### type definition
 
 ```ts
-function useSpotifyPlayer(): Spotify.Player | null;
+type SpotifyPlayer = {
+  connect: () => Promise<boolean>;
+  disconnect: () => void;
+  getCurrentState: () => Promise<Spotify.PlaybackState | null>;
+  nextTrack: () => Promise<void>;
+  pause: () => Promise<void>;
+  previousTrack: () => Promise<void>;
+  resume: () => Promise<void>;
+  seek: (pos_ms: number) => Promise<void>;
+  togglePlay: () => Promise<void>;
+};
+function useSpotifyPlayer(): SpotifyPlayer | null;
 ```
 
 #### usage
@@ -176,10 +183,16 @@ const PauseResumeButton = () => {
 
 A custom hook to get an object representing the player's playback state. See [the Spotify for Developers reference](https://developer.spotify.com/documentation/web-playback-sdk/reference/#objects) for more information on the properties that the object has.
 
+If `interval` is `true`, state updates will occur during playback at the interval specified by `durationMS`. Even if it is `false`, state updates by `SpotifyPlayer.pause` and `SpotifyPlayer.resume` will occur.
+
 #### type definition
 
 ```ts
-function usePlaybackState(): Spotify.PlaybackState | null;
+function usePlaybackState(interval?: false): Spotify.PlaybackState | null;
+function usePlaybackState(
+  interval: true,
+  durationMS?: number,
+): Spotify.PlaybackState | null;
 ```
 
 #### usage
