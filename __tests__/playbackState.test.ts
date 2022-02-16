@@ -1,7 +1,7 @@
 const mockUseSpotifyPlayer = jest.fn();
 jest.mock("../src/spotifyPlayer", () => {
   return {
-    useSpotifyPlayerRawInstance: mockUseSpotifyPlayer,
+    useSpotifyPlayer: mockUseSpotifyPlayer,
   };
 });
 

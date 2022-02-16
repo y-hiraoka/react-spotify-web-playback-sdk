@@ -106,12 +106,12 @@ SDK をラップした React コンポーネントです。これは React-Naiti
 
 #### `props`
 
-| prop name              | type                                        | default value | description                                                                                                                                                          |
-| :--------------------- | :------------------------------------------ | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `deviceName`           | string                                      | (required)    | Spotify Connect プレイヤーの名前。                                                                                                                                   |
-| `getOAuthToken`        | (callback: (token: string) => void) => void | (required)    | `player.connect()` を呼び出すとき、またはユーザーのアクセストークンの有効期限が切れたときに呼び出される関数。 `useCallback` によって**参照同一性を保証すべき**です。 |
-| `volume`               | number                                      | 1             | ボリューム。0 から 1 の小数を指定します。                                                                                                                            |
-| `connectOnInitialized` | boolean                                     | true          | 初期化と同時に接続をするか。                                                                                                                                         |
+| prop name              | type                                        | default value | description                                                                                                   |
+| :--------------------- | :------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------------------- |
+| `initialDeviceName`    | string                                      | (required)    | Spotify Connect プレイヤーの名前の初期値。                                                                    |
+| `getOAuthToken`        | (callback: (token: string) => void) => void | (required)    | `player.connect()` を呼び出すとき、またはユーザーのアクセストークンの有効期限が切れたときに呼び出される関数。 |
+| `initialVolume`        | number                                      | 1             | ボリュームの初期値。0 から 1 の小数を指定します。                                                             |
+| `connectOnInitialized` | boolean                                     | true          | 初期化と同時に接続をするか。                                                                                  |
 
 #### 使用例
 
@@ -163,18 +163,7 @@ const MyPlayer = () => {
 #### 型定義
 
 ```ts
-type SpotifyPlayer = {
-  connect: () => Promise<boolean>;
-  disconnect: () => void;
-  getCurrentState: () => Promise<Spotify.PlaybackState | null>;
-  nextTrack: () => Promise<void>;
-  pause: () => Promise<void>;
-  previousTrack: () => Promise<void>;
-  resume: () => Promise<void>;
-  seek: (pos_ms: number) => Promise<void>;
-  togglePlay: () => Promise<void>;
-};
-function useSpotifyPlayer(): SpotifyPlayer | null;
+function useSpotifyPlayer(): Spotify.Player | null;
 ```
 
 #### 使用例
@@ -203,10 +192,9 @@ const PauseResumeButton = () => {
 #### 型定義
 
 ```ts
-function usePlaybackState(interval?: false): Spotify.PlaybackState | null;
 function usePlaybackState(
-  interval: true,
-  durationMS?: number,
+  interval?: boolean = false,
+  durationMS?: number = 1000,
 ): Spotify.PlaybackState | null;
 ```
 

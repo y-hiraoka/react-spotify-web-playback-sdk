@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { MUST_BE_WRAPPED_MESSAGE } from "./constant";
-import { useSpotifyPlayerRawInstance } from "./spotifyPlayer";
+import { useSpotifyPlayer } from "./spotifyPlayer";
 
 export type PlayerDevice = Spotify.WebPlaybackInstance & {
   status: "ready" | "not_ready";
@@ -10,7 +10,7 @@ const DeviceContext = createContext<PlayerDevice | null | undefined>(undefined);
 
 export const DeviceProvider: React.FC = ({ children }) => {
   const [device, setDevice] = useState<PlayerDevice | null>(null);
-  const player = useSpotifyPlayerRawInstance();
+  const player = useSpotifyPlayer();
 
   useEffect(() => {
     if (player === null) return;

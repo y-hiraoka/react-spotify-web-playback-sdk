@@ -7,17 +7,17 @@ import { SpotifyPlayerProvider } from "./spotifyPlayer";
 import { WebPlaybackSDKReadyProvider } from "./webPlaybackSDKReady";
 
 export type WebPlaybackSDKProps = {
-  deviceName: Spotify.PlayerInit["name"];
+  initialDeviceName: Spotify.PlayerInit["name"];
   getOAuthToken: Spotify.PlayerInit["getOAuthToken"];
-  volume?: Spotify.PlayerInit["volume"];
+  initialVolume?: Spotify.PlayerInit["volume"];
   connectOnInitialized?: boolean;
 };
 
 export const WebPlaybackSDK: React.FC<WebPlaybackSDKProps> = ({
   children,
-  deviceName,
+  initialDeviceName,
   getOAuthToken,
-  volume,
+  initialVolume,
   connectOnInitialized = true,
 }) => {
   useEffect(() => {
@@ -34,9 +34,9 @@ export const WebPlaybackSDK: React.FC<WebPlaybackSDKProps> = ({
   return (
     <WebPlaybackSDKReadyProvider>
       <SpotifyPlayerProvider
-        deviceName={deviceName}
+        initialDeviceName={initialDeviceName}
         getOAuthToken={getOAuthToken}
-        volume={volume}
+        initialVolume={initialVolume}
         connectOnInitialized={connectOnInitialized}>
         <PlaybackStateProvider>
           <DeviceProvider>

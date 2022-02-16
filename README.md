@@ -93,9 +93,9 @@ The custom hooks included in the library will not work unless they are inside th
 
 | prop name              | type                                        | default value | description                                                                                                                                                 |
 | :--------------------- | :------------------------------------------ | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `deviceName`           | string                                      | (required)    | A name of Spotify Connect player.                                                                                                                           |
-| `getOAuthToken`        | (callback: (token: string) => void) => void | (required)    | A function called when `player.connect()` is called, or when the user's access token expires. **Reference identity should be guaranteed** by `useCallback`. |
-| `volume`               | number                                      | 1             | a value of volume. specified as a decimal number between 0 and 1.                                                                                           |
+| `initialDeviceName`    | string                                      | (required)    | an initial value of Spotify Connect player name.                                                                                                            |
+| `getOAuthToken`        | (callback: (token: string) => void) => void | (required)    | a function called when `player.connect()` is called, or when the user's access token expires. **Reference identity should be guaranteed** by `useCallback`. |
+| `initialVolume`        | number                                      | 1             | a initial value of volume. specified as a decimal number between 0 and 1.                                                                                   |
 | `connectOnInitialized` | boolean                                     | true          | Whether to make a connection at the same time as initialization.                                                                                            |
 
 #### usage
@@ -148,18 +148,7 @@ A custom hook that returns an object with functions to manipulate the player, su
 #### type definition
 
 ```ts
-type SpotifyPlayer = {
-  connect: () => Promise<boolean>;
-  disconnect: () => void;
-  getCurrentState: () => Promise<Spotify.PlaybackState | null>;
-  nextTrack: () => Promise<void>;
-  pause: () => Promise<void>;
-  previousTrack: () => Promise<void>;
-  resume: () => Promise<void>;
-  seek: (pos_ms: number) => Promise<void>;
-  togglePlay: () => Promise<void>;
-};
-function useSpotifyPlayer(): SpotifyPlayer | null;
+function useSpotifyPlayer(): Spotify.Player | null;
 ```
 
 #### usage
@@ -188,10 +177,9 @@ If `interval` is `true`, state updates will occur during playback at the interva
 #### type definition
 
 ```ts
-function usePlaybackState(interval?: false): Spotify.PlaybackState | null;
 function usePlaybackState(
-  interval: true,
-  durationMS?: number,
+  interval?: boolean = false,
+  durationMS?: number = 1000,
 ): Spotify.PlaybackState | null;
 ```
 

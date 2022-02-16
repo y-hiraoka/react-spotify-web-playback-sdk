@@ -19,7 +19,8 @@
     "web-playback-sdk"
   ],
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "author": "https://github.com/y-hiraoka",
   "repository": {
@@ -55,6 +56,6 @@
     "*.{js,jsx,ts,tsx}": "prettier --write"
   },
   "dependencies": {
-    "@types/spotify-web-playback-sdk": "^0.1.9"
+    "@types/spotify-web-playback-sdk": "^0.1.12"
   }
 }

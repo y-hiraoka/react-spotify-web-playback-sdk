@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { MUST_BE_WRAPPED_MESSAGE } from "./constant";
-import { useSpotifyPlayerRawInstance } from "./spotifyPlayer";
+import { useSpotifyPlayer } from "./spotifyPlayer";
 
 const PlaybackStateContext = createContext<Spotify.PlaybackState | null | undefined>(
   undefined,
@@ -11,7 +11,7 @@ export const PlaybackStateProvider: React.FC = ({ children }) => {
     null,
   );
 
-  const player = useSpotifyPlayerRawInstance();
+  const player = useSpotifyPlayer();
 
   useEffect(() => {
     if (player === null) return;
@@ -28,13 +28,8 @@ export const PlaybackStateProvider: React.FC = ({ children }) => {
   return <PlaybackStateContext.Provider value={playbackState} children={children} />;
 };
 
-export function usePlaybackState(interval?: false): Spotify.PlaybackState | null;
 export function usePlaybackState(
-  interval: true,
-  durationMS?: number,
-): Spotify.PlaybackState | null;
-export function usePlaybackState(
-  interval?: boolean,
+  interval = false,
   durationMS = 1000,
 ): Spotify.PlaybackState | null {
   const fromContext = useContext(PlaybackStateContext);
@@ -43,7 +38,7 @@ export function usePlaybackState(
 
   const [playbackState, setPlaybackState] = useState(fromContext);
 
-  const player = useSpotifyPlayerRawInstance();
+  const player = useSpotifyPlayer();
 
   useEffect(() => setPlaybackState(fromContext), [fromContext]);
 
