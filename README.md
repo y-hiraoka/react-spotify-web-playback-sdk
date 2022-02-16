@@ -91,12 +91,12 @@ The custom hooks included in the library will not work unless they are inside th
 
 #### `props`
 
-| prop name              | type                                        | default value | description                                                                                                                                                 |
-| :--------------------- | :------------------------------------------ | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `initialDeviceName`    | string                                      | (required)    | an initial value of Spotify Connect player name.                                                                                                            |
-| `getOAuthToken`        | (callback: (token: string) => void) => void | (required)    | a function called when `player.connect()` is called, or when the user's access token expires. **Reference identity should be guaranteed** by `useCallback`. |
-| `initialVolume`        | number                                      | 1             | a initial value of volume. specified as a decimal number between 0 and 1.                                                                                   |
-| `connectOnInitialized` | boolean                                     | true          | Whether to make a connection at the same time as initialization.                                                                                            |
+| prop name              | type                                        | default value | description                                                                                   |
+| :--------------------- | :------------------------------------------ | ------------- | --------------------------------------------------------------------------------------------- |
+| `initialDeviceName`    | string                                      | (required)    | an initial value of Spotify Connect player name.                                              |
+| `getOAuthToken`        | (callback: (token: string) => void) => void | (required)    | a function called when `player.connect()` is called, or when the user's access token expires. |
+| `initialVolume`        | number                                      | 1             | a initial value of volume. specified as a decimal number between 0 and 1.                     |
+| `connectOnInitialized` | boolean                                     | true          | Whether to make a connection at the same time as initialization.                              |
 
 #### usage
 
