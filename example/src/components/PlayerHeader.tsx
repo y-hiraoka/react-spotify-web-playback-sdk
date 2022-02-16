@@ -1,15 +1,17 @@
+import { useEffect, useState } from "react";
+import { useSpotifyPlayer } from "react-spotify-web-playback-sdk";
 import styles from "./PlayerHeader.module.css";
 import { TextInput } from "./TextInput";
 
-type Props = {
-  deviceName: string;
-  deviceNameOnChange: (name: string) => void;
-};
+export const PlayerHeader: React.VFC = () => {
+  const [deviceName, setDeviceName] = useState("Spotify Player on Next.js");
 
-export const PlayerHeader: React.VFC<Props> = ({
-  deviceName,
-  deviceNameOnChange,
-}) => {
+  const spotifyPlayer = useSpotifyPlayer();
+
+  useEffect(() => {
+    spotifyPlayer?.setName(deviceName);
+  }, [deviceName]);
+
   return (
     <header className={styles.header}>
       <div className={styles.headerTop}>
@@ -18,7 +20,7 @@ export const PlayerHeader: React.VFC<Props> = ({
           <div className={styles.deviceNameTop}>
             <TextInput
               value={deviceName}
-              onChange={deviceNameOnChange}
+              onChange={setDeviceName}
               placeholder="input your device name..."
             />
           </div>
@@ -34,7 +36,7 @@ export const PlayerHeader: React.VFC<Props> = ({
       <div className={styles.headerBottom}>
         <TextInput
           value={deviceName}
-          onChange={deviceNameOnChange}
+          onChange={setDeviceName}
           placeholder="input device name..."
         />
       </div>

@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { PlayerController } from "./PlayerContoller";
+import { PlayerController } from "./PlayerController";
 import { StateConsumer } from "./StateConsumer";
 import styles from "./PlayerContent.module.css";
 

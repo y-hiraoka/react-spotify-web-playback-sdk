@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { GetServerSideProps } from "next";
 import nookies from "nookies";
 import { WebPlaybackSDK } from "react-spotify-web-playback-sdk";
@@ -20,17 +20,15 @@ const Player: React.VFC<Props> = ({ token }) => {
     [token.access_token],
   );
 
-  const [deviceName, setDeviceName] = useState("Spotify Player on Next.js");
-
   return (
     <WebPlaybackSDK
-      deviceName={deviceName}
+      initialDeviceName="Spotify Player on Next.js"
       getOAuthToken={getOAuthToken}
       connectOnInitialized={true}
-      volume={0.5}>
+      initialVolume={0.5}>
       <div className={styles.root}>
         <div className={styles.header}>
-          <PlayerHeader deviceName={deviceName} deviceNameOnChange={setDeviceName} />
+          <PlayerHeader />
         </div>
         <main className={styles.player}>
           <PlayerContent access_token={token.access_token} />
