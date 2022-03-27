@@ -276,3 +276,13 @@ const ErrorState = () => {
 ## LICENSE
 
 MIT
+
+## Demo app
+
+A minimal demo app:
+
+https://react-spotify-web-playback-sdk.vercel.app/
+
+An complete demo app:
+
+https://github.com/y-hiraoka/next-spotify-app
