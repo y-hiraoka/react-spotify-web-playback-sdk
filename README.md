@@ -283,6 +283,6 @@ A minimal demo app:
 
 https://react-spotify-web-playback-sdk.vercel.app/
 
-An complete demo app:
+A complete demo app:
 
 https://github.com/y-hiraoka/next-spotify-app
