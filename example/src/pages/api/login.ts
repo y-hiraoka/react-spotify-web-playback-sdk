@@ -15,7 +15,7 @@ const handler: NextApiHandler = (req, res) => {
     const redirectParams = new URLSearchParams({
       response_type: "code",
       client_id: SPOTIFY_CLIENT_ID,
-      scope: encodeURIComponent(SPOTIFY_SCOPES.join(" ")),
+      scope: SPOTIFY_SCOPES.join(" "),
       redirect_uri: SPOTIFY_REDIRECT_URI,
       state: state,
     });
