@@ -47,10 +47,6 @@ test("usePlayerDevice is not wrapped with Provider", () => {
 test("In case useSpotifyPlayer returns null", () => {
   mockUseSpotifyPlayer.mockReturnValue(null);
   const { result } = renderHook(() => usePlayerDevice(), {
-    initialProps: {
-      playbackStateAutoUpdate: true,
-      playbackStateUpdateDuration_ms: 1000,
-    },
     wrapper: DeviceProvider,
   });
 

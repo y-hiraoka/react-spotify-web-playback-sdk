@@ -6,7 +6,9 @@ export type ErrorState = Spotify.Error & { type: Spotify.ErrorTypes };
 
 const ErrorStateContext = createContext<ErrorState | null | undefined>(undefined);
 
-export const ErrorStateProvider: React.FC = ({ children }) => {
+export const ErrorStateProvider: React.FC<{ children?: React.ReactNode }> = ({
+  children,
+}) => {
   const [errorState, setErrorState] = useState<ErrorState | null>(null);
   const player = useSpotifyPlayer();
 

@@ -15,6 +15,7 @@ type ProviderProps = {
   getOAuthToken: Spotify.PlayerInit["getOAuthToken"];
   initialVolume?: Spotify.PlayerInit["volume"];
   connectOnInitialized: boolean;
+  children?: React.ReactNode;
 };
 
 export const SpotifyPlayerProvider: React.FC<ProviderProps> = ({

@@ -8,7 +8,9 @@ export type PlayerDevice = Spotify.WebPlaybackInstance & {
 
 const DeviceContext = createContext<PlayerDevice | null | undefined>(undefined);
 
-export const DeviceProvider: React.FC = ({ children }) => {
+export const DeviceProvider: React.FC<{ children?: React.ReactNode }> = ({
+  children,
+}) => {
   const [device, setDevice] = useState<PlayerDevice | null>(null);
   const player = useSpotifyPlayer();
 

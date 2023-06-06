@@ -11,6 +11,7 @@ export type WebPlaybackSDKProps = {
   getOAuthToken: Spotify.PlayerInit["getOAuthToken"];
   initialVolume?: Spotify.PlayerInit["volume"];
   connectOnInitialized?: boolean;
+  children?: React.ReactNode;
 };
 
 export const WebPlaybackSDK: React.FC<WebPlaybackSDKProps> = ({

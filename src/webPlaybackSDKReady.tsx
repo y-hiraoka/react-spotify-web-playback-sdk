@@ -3,7 +3,9 @@ import { MUST_BE_WRAPPED_MESSAGE } from "./constant";
 
 const WebPlaybackSDKReadyContext = createContext<boolean | undefined>(undefined);
 
-export const WebPlaybackSDKReadyProvider: React.FC = ({ children }) => {
+export const WebPlaybackSDKReadyProvider: React.FC<{
+  children?: React.ReactNode;
+}> = ({ children }) => {
   const [webPlaybackSDKReady, setWebPlaybackSDKReady] = useState(false);
 
   useEffect(() => {
