@@ -8,16 +8,17 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "^10.2.0",
+    "next": "^13.4.5",
     "nookies": "^2.5.2",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-spotify-web-playback-sdk": "^3.0.1",
-    "uuid": "^8.3.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-spotify-web-playback-sdk": "^3.0.2",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@types/react": "^17.0.3",
-    "@types/uuid": "^8.3.0",
-    "typescript": "^4.2.4"
+    "@types/node": "^18.16.18",
+    "@types/react": "^18.2.12",
+    "@types/uuid": "^9.0.2",
+    "typescript": "^5.1.3"
   }
 }
