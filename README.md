@@ -40,9 +40,9 @@ const MySpotifyPlayer: React.VFC = () => {
 
   return (
     <WebPlaybackSDK
-      deviceName="My awesome Spotify app"
+      initialDeviceName="My awesome Spotify app"
       getOAuthToken={getOAuthToken}
-      volume={0.5}>
+      initialVolume={0.5}>
       {/* `TogglePlay` and `SongTitle` will be defined later. */}
       <TogglePlay />
       <SongTitle />
@@ -51,13 +51,13 @@ const MySpotifyPlayer: React.VFC = () => {
 };
 ```
 
-`props.deviceName` is a value that will be displayed in the official Spotify app as the device name.
+`props.initialDeviceName` is a value that will be displayed in the official Spotify app as the device name.
 
 `props.getOAuthToken` is a function that takes a `callback` function as an argument to receive the access token.
 
-`props.volume` is a value between 0 and 1. If not specified, it will be set to the default value of 1.
+`props.initialVolume` is a value between 0 and 1. If not specified, it will be set to the default value of 1.
 
-The `props.volume` can be a value between 0 and 1. If not specified, `1` will be set as the default value.
+The `props.initialVolume` can be a value between 0 and 1. If not specified, `1` will be set as the default value.
 
 ### `useSpotifyPlayer`
 
@@ -109,9 +109,9 @@ const MyPlayer = () => {
 
   return (
     <WebPlaybackSDK
-      deviceName="My Spotify App"
+      initialDeviceName="My Spotify App"
       getOAuthToken={getOAuthToken}
-      volume={0.5}
+      initialVolume={0.5}
       connectOnInitialized={true}>
       <SomeComponentsUsingCustomHook />
     </WebPlaybackSDK>
