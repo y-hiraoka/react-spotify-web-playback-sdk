@@ -27,7 +27,7 @@ const mockPlayerSetVolume = jest.fn();
 Object.defineProperty(window, "Spotify", {
   writable: true,
   value: {
-    Player: jest.fn<Spotify.Player, [Spotify.PlayerInit]>(arg => {
+    Player: jest.fn<Spotify.Player, [Spotify.PlayerInit]>((arg) => {
       return {
         _options: { ...arg, id: "device_id" },
         on: mockPlayerAddListener,

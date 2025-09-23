@@ -5,14 +5,16 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
+    "@types/spotify-web-playback-sdk": "^0.1.19",
     "next": "^13.4.5",
     "nookies": "^2.5.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-spotify-web-playback-sdk": "^3.0.2",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-spotify-web-playback-sdk": "workspace:*",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

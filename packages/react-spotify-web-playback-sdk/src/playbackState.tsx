@@ -2,16 +2,15 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { MUST_BE_WRAPPED_MESSAGE } from "./constant";
 import { useSpotifyPlayer } from "./spotifyPlayer";
 
-const PlaybackStateContext = createContext<Spotify.PlaybackState | null | undefined>(
-  undefined,
-);
+const PlaybackStateContext = createContext<
+  Spotify.PlaybackState | null | undefined
+>(undefined);
 
-export const PlaybackStateProvider: React.FC<{ children?: React.ReactNode }> = ({
-  children,
-}) => {
-  const [playbackState, setPlaybackState] = useState<Spotify.PlaybackState | null>(
-    null,
-  );
+export const PlaybackStateProvider: React.FC<{
+  children?: React.ReactNode;
+}> = ({ children }) => {
+  const [playbackState, setPlaybackState] =
+    useState<Spotify.PlaybackState | null>(null);
 
   const player = useSpotifyPlayer();
 
@@ -24,10 +23,13 @@ export const PlaybackStateProvider: React.FC<{ children?: React.ReactNode }> = (
 
     player.addListener("player_state_changed", playerStateChanged);
 
-    return () => player.removeListener("player_state_changed", playerStateChanged);
+    return () =>
+      player.removeListener("player_state_changed", playerStateChanged);
   }, [player]);
 
-  return <PlaybackStateContext.Provider value={playbackState} children={children} />;
+  return (
+    <PlaybackStateContext.Provider value={playbackState} children={children} />
+  );
 };
 
 export function usePlaybackState(
@@ -58,7 +60,13 @@ export function usePlaybackState(
     }, durationMS);
 
     return () => window.clearInterval(intervalId);
-  }, [interval, player, playbackStateIsNull, playbackState?.paused, durationMS]);
+  }, [
+    interval,
+    player,
+    playbackStateIsNull,
+    playbackState?.paused,
+    durationMS,
+  ]);
 
   return playbackState;
 }

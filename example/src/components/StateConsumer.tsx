@@ -21,7 +21,10 @@ export const StateConsumer: React.VFC<{ access_token: string }> = memo(
       // https://developer.spotify.com/documentation/web-api/reference/#endpoint-transfer-a-users-playback
       fetch(`https://api.spotify.com/v1/me/player`, {
         method: "PUT",
-        body: JSON.stringify({ device_ids: [playerDevice.device_id], play: false }),
+        body: JSON.stringify({
+          device_ids: [playerDevice.device_id],
+          play: false,
+        }),
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${access_token}`,
@@ -31,7 +34,10 @@ export const StateConsumer: React.VFC<{ access_token: string }> = memo(
 
     return (
       <div className={styles.root}>
-        <StateSummary summary="useWebPlaybackSDKReady" state={webPlaybackSDKReady} />
+        <StateSummary
+          summary="useWebPlaybackSDKReady"
+          state={webPlaybackSDKReady}
+        />
         <StateSummary summary="usePlaybackState" state={playbackState} />
         <StateSummary summary="usePlayerDevice" state={playerDevice} />
         <StateSummary summary="useErrorState" state={errorState} />

@@ -12,12 +12,16 @@ import { DeviceProvider, usePlayerDevice, PlayerDevice } from "../src/device";
 type MockSpotifyPlayer = Pick<Spotify.Player, "addListener" | "removeListener">;
 
 let addedReadyListener: ((state: PlayerDevice) => void) | undefined = undefined;
-let addedNotReadyListener: ((state: PlayerDevice) => void) | undefined = undefined;
+let addedNotReadyListener: ((state: PlayerDevice) => void) | undefined =
+  undefined;
 
 const mockPlayerAddListener = jest
   .fn()
   .mockImplementation(
-    (eventname: "ready" | "not_ready", listener: (state: PlayerDevice) => void) => {
+    (
+      eventname: "ready" | "not_ready",
+      listener: (state: PlayerDevice) => void,
+    ) => {
       if (eventname === "ready") {
         addedReadyListener = listener;
       } else {
@@ -76,7 +80,10 @@ test("Add and remove eventListers for playerDevice.", () => {
       addedNotReadyListener({ device_id: "device_id", status: "not_ready" }),
   );
 
-  expect(result.current).toEqual({ device_id: "device_id", status: "not_ready" });
+  expect(result.current).toEqual({
+    device_id: "device_id",
+    status: "not_ready",
+  });
 
   unmount();
 

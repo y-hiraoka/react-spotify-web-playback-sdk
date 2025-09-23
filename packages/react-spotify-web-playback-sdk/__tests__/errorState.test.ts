@@ -7,7 +7,11 @@ jest.mock("../src/spotifyPlayer", () => {
 
 import { act, renderHook } from "@testing-library/react-hooks";
 import { MUST_BE_WRAPPED_MESSAGE } from "../src/constant";
-import { ErrorStateProvider, useErrorState, ErrorState } from "../src/errorState";
+import {
+  ErrorStateProvider,
+  useErrorState,
+  ErrorState,
+} from "../src/errorState";
 
 type MockSpotifyPlayer = Pick<Spotify.Player, "addListener" | "removeListener">;
 
@@ -17,10 +21,10 @@ let addedInitializationErrorListener:
 let addedAuthenticationErrorListener:
   | ((state: ErrorState) => void)
   | undefined = undefined;
-let addedAccountErrorListener: ((state: ErrorState) => void) | undefined = undefined;
-let addedPlaybackErrorListener:
-  | ((state: ErrorState) => void)
-  | undefined = undefined;
+let addedAccountErrorListener: ((state: ErrorState) => void) | undefined =
+  undefined;
+let addedPlaybackErrorListener: ((state: ErrorState) => void) | undefined =
+  undefined;
 
 const mockPlayerAddListener = jest
   .fn()

@@ -14,9 +14,8 @@ type MockSpotifyPlayer = Pick<
   "addListener" | "removeListener" | "getCurrentState"
 >;
 
-let addedEventListener:
-  | ((state: Spotify.PlaybackState) => void)
-  | undefined = undefined;
+let addedEventListener: ((state: Spotify.PlaybackState) => void) | undefined =
+  undefined;
 
 const mockPlayerAddListener = jest
   .fn()

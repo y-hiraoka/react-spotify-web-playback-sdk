@@ -10,7 +10,10 @@ export const PlayerController: React.VFC = memo(() => {
   return (
     <div className={styles.root}>
       <div className={styles.buttons}>
-        <button className={styles.action} onClick={() => player.previousTrack()}>
+        <button
+          className={styles.action}
+          onClick={() => player.previousTrack()}
+        >
           <code>player.previousTrack</code>
         </button>
         <button className={styles.action} onClick={() => player.togglePlay()}>

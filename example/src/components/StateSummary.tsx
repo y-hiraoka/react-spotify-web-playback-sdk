@@ -13,7 +13,8 @@ export const StateSummary: React.VFC<Props> = memo(({ state, summary }) => {
     <details
       className={styles.root}
       open={open}
-      onToggle={() => setOpen(prev => !prev)}>
+      onToggle={() => setOpen((prev) => !prev)}
+    >
       <summary>
         <code>{summary}</code>
       </summary>

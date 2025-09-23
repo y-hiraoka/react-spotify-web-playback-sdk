@@ -4,7 +4,9 @@ import { useSpotifyPlayer } from "./spotifyPlayer";
 
 export type ErrorState = Spotify.Error & { type: Spotify.ErrorTypes };
 
-const ErrorStateContext = createContext<ErrorState | null | undefined>(undefined);
+const ErrorStateContext = createContext<ErrorState | null | undefined>(
+  undefined,
+);
 
 export const ErrorStateProvider: React.FC<{ children?: React.ReactNode }> = ({
   children,
