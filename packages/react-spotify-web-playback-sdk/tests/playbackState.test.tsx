@@ -91,7 +91,7 @@ describe("usePlaybackState", () => {
   });
 
   it("should update the playback state when the event is triggered", () => {
-    const { result, unmount } = renderHook(
+    const { result } = renderHook(
       () => {
         const playbackState = usePlaybackState();
         const player = useSpotifyPlayer();
@@ -207,18 +207,4 @@ describe("usePlaybackState", () => {
 
     expect(result.current.playbackState).toEqual({ timestamp: 400 });
   });
-});
-
-let addedEventListener: ((state: Spotify.PlaybackState) => void) | undefined =
-  undefined;
-
-const mockPlayerAddListener = vi
-  .fn()
-  .mockImplementation(
-    (eventname: string, listener: (state: Spotify.PlaybackState) => void) => {
-      addedEventListener = listener;
-    },
-  );
-const mockPlayerRemoveListener = vi.fn(() => {
-  addedEventListener = undefined;
 });
