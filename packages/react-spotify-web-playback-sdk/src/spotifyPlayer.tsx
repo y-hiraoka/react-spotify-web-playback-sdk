@@ -8,7 +8,9 @@ import React, {
 import { MUST_BE_WRAPPED_MESSAGE } from "./constant";
 import { useWebPlaybackSDKReady } from "./webPlaybackSDKReady";
 
-const PlayerContext = createContext<Spotify.Player | null | undefined>(undefined);
+const PlayerContext = createContext<Spotify.Player | null | undefined>(
+  undefined,
+);
 
 type ProviderProps = {
   initialDeviceName: Spotify.PlayerInit["name"];
@@ -38,7 +40,7 @@ export const SpotifyPlayerProvider: React.FC<ProviderProps> = ({
       if (webPlaybackSDKReady) {
         const player = new Spotify.Player({
           name: initialDeviceName,
-          getOAuthToken: callback => getOAuthTokenRef.current(callback),
+          getOAuthToken: (callback) => getOAuthTokenRef.current(callback),
           volume: initialVolume,
         });
 

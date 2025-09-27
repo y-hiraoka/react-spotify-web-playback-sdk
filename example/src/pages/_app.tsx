@@ -21,7 +21,10 @@ const MyApp: React.VFC<AppProps> = ({ Component, pageProps }) => {
           content="https://react-spotify-web-playback-sdk.vercel.app/"
         />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="React Web Playback SDK Demo App" />
+        <meta
+          property="og:site_name"
+          content="React Web Playback SDK Demo App"
+        />
       </Head>
       <Component {...pageProps} />
     </>

@@ -1,0 +1,48 @@
+{
+  "name": "react-spotify-web-playback-sdk",
+  "version": "3.0.2",
+  "description": "React Wrapper of Spotify Web Playback SDK",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "types": "dist/index.d.cts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "check-types": "tsc --noEmit",
+    "test": "vitest"
+  },
+  "keywords": [
+    "react",
+    "spotify",
+    "web-playback-sdk"
+  ],
+  "files": [
+    "dist"
+  ],
+  "author": "https://github.com/y-hiraoka",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/y-hiraoka/react-spotify-web-playback-sdk",
+    "directory": "packages/react-spotify-web-playback-sdk"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^18.2.8",
+    "@types/react-dom": "^18.2.4",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "dependencies": {
+    "@types/spotify-web-playback-sdk": "^0.1.12"
+  }
+}

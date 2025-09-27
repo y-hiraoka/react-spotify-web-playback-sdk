@@ -38,7 +38,8 @@ export const WebPlaybackSDK: React.FC<WebPlaybackSDKProps> = ({
         initialDeviceName={initialDeviceName}
         getOAuthToken={getOAuthToken}
         initialVolume={initialVolume}
-        connectOnInitialized={connectOnInitialized}>
+        connectOnInitialized={connectOnInitialized}
+      >
         <PlaybackStateProvider>
           <DeviceProvider>
             <ErrorStateProvider>{children}</ErrorStateProvider>

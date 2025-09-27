@@ -7,7 +7,11 @@ type Props = {
   placeholder: string;
 };
 
-export const TextInput: React.VFC<Props> = ({ value, onChange, placeholder }) => {
+export const TextInput: React.VFC<Props> = ({
+  value,
+  onChange,
+  placeholder,
+}) => {
   const [focus, setFocus] = useState(false);
 
   return (
@@ -20,7 +24,7 @@ export const TextInput: React.VFC<Props> = ({ value, onChange, placeholder }) =>
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
         value={value}
-        onChange={e => onChange(e.target.value)}
+        onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
       />
     </div>

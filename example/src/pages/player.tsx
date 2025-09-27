@@ -16,7 +16,7 @@ type Props = { token: TokenObject };
 
 const Player: React.VFC<Props> = ({ token }) => {
   const getOAuthToken: Spotify.PlayerInit["getOAuthToken"] = useCallback(
-    callback => callback(token.access_token),
+    (callback) => callback(token.access_token),
     [token.access_token],
   );
 
@@ -25,7 +25,8 @@ const Player: React.VFC<Props> = ({ token }) => {
       initialDeviceName="Spotify Player on Next.js"
       getOAuthToken={getOAuthToken}
       connectOnInitialized={true}
-      initialVolume={0.5}>
+      initialVolume={0.5}
+    >
       <div className={styles.root}>
         <div className={styles.header}>
           <PlayerHeader />
@@ -62,7 +63,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
     const response = await fetch(SPOTIFY_API_TOKEN_URL, {
       method: "POST",
       body: params,
-    }).then(res => res.json());
+    }).then((res) => res.json());
 
     if (isTokenObject(response)) {
       return {

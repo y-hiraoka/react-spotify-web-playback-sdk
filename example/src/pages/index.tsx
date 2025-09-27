@@ -17,7 +17,8 @@ export default function Home() {
           className={styles.githubLink}
           target="_blank"
           rel="noopner noreferer"
-          href="https://github.com/y-hiraoka/react-spotify-web-playback-sdk">
+          href="https://github.com/y-hiraoka/react-spotify-web-playback-sdk"
+        >
           GitHub Repository
         </a>
       </div>

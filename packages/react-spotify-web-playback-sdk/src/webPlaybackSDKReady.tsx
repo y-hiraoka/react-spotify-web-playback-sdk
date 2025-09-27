@@ -1,7 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { MUST_BE_WRAPPED_MESSAGE } from "./constant";
 
-const WebPlaybackSDKReadyContext = createContext<boolean | undefined>(undefined);
+const WebPlaybackSDKReadyContext = createContext<boolean | undefined>(
+  undefined,
+);
 
 export const WebPlaybackSDKReadyProvider: React.FC<{
   children?: React.ReactNode;

@@ -1,20 +1,46 @@
-name: Publish to npm
+name: Release
 
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
 
 jobs:
-  publish:
+  release:
+    name: Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - name: Checkout Repo
+        uses: actions/checkout@v5
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
         with:
-          node-version: 14
-      - run: npm ci
-      - run: npm run build
-      - run: npm test
-      - uses: JS-DevTools/npm-publish@v1
+          node-version: 22
+          cache: "pnpm"
+
+      - name: Install latest npm
+        run: npm install -g npm@latest
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
         with:
-          token: ${{ secrets.NPM_TOKEN }}
+          # This expects you to have a script called release which does a build for your packages and calls changeset publish
+          publish: pnpm run changeset:publish
+          version: pnpm run changeset:version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

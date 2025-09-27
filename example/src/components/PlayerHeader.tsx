@@ -16,7 +16,11 @@ export const PlayerHeader: React.VFC = () => {
     <header className={styles.header}>
       <div className={styles.headerTop}>
         <div className={styles.headerLeft}>
-          <img className={styles.smallLogo} src="/logo-small.png" alt="small logo" />
+          <img
+            className={styles.smallLogo}
+            src="/logo-small.png"
+            alt="small logo"
+          />
           <div className={styles.deviceNameTop}>
             <TextInput
               value={deviceName}
@@ -29,7 +33,8 @@ export const PlayerHeader: React.VFC = () => {
           className={styles.githubLink}
           href="https://github.com/y-hiraoka/react-spotify-web-playback-sdk"
           target="_blank"
-          rel="noopener noreferer">
+          rel="noopener noreferer"
+        >
           GitHub
         </a>
       </div>

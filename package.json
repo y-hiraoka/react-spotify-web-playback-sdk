@@ -1,61 +1,25 @@
 {
-  "name": "react-spotify-web-playback-sdk",
-  "version": "3.0.2",
-  "description": "React Wrapper of Spotify Web Playback SDK",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "module": "dist/index.module.js",
-  "unpkg": "dist/index.umd.js",
-  "source": "src/index.ts",
+  "name": "monorepo-root",
+  "private": true,
   "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "test:ci": "turbo run test:ci",
+    "check-types": "turbo run check-types",
     "format": "prettier --write '**/*.{js,jsx,ts,tsx}'",
-    "build": "rimraf dist && microbundle --no-compress --external react --globals react=React --strict --jsx React.createElement -f es,cjs,umd",
-    "test": "jest",
-    "prepare": "husky install"
+    "changeset": "changeset",
+    "changeset:publish": "turbo run build --filter='./packages/*' && changeset publish",
+    "changeset:version": "changeset version && pnpm install --lockfile-only"
   },
-  "keywords": [
-    "react",
-    "spotify",
-    "web-playback-sdk"
-  ],
-  "files": [
-    "dist",
-    "src"
-  ],
-  "author": "https://github.com/y-hiraoka",
-  "repository": {
-    "url": "https://github.com/y-hiraoka/react-spotify-web-playback-sdk"
-  },
-  "license": "MIT",
   "devDependencies": {
-    "@testing-library/react": "^11.2.6",
-    "@testing-library/react-hooks": "^5.1.2",
-    "@types/jest": "^26.0.22",
-    "@types/react": "^18.2.8",
-    "@types/react-dom": "^18.2.4",
-    "husky": "^6.0.0",
-    "jest": "^26.6.3",
-    "lint-staged": "^10.5.4",
-    "microbundle": "^0.13.0",
-    "prettier": "^2.2.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "rimraf": "^3.0.2",
-    "ts-jest": "^26.5.5",
-    "typescript": "^4.2.4"
+    "@changesets/cli": "^2.29.7",
+    "@testing-library/react": "^16.3.0",
+    "prettier": "^3.6.2",
+    "tsup": "^8.5.0",
+    "turbo": "^2.5.6",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
   },
-  "peerDependencies": {
-    "react": ">=16.8.0"
-  },
-  "peerDependenciesMeta": {
-    "@types/react": {
-      "optional": true
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "prettier --write"
-  },
-  "dependencies": {
-    "@types/spotify-web-playback-sdk": "^0.1.12"
-  }
+  "packageManager": "pnpm@10.17.1+sha512.17c560fca4867ae9473a3899ad84a88334914f379be46d455cbf92e5cf4b39d34985d452d2583baf19967fa76cb5c17bc9e245529d0b98745721aa7200ecaf7a"
 }
