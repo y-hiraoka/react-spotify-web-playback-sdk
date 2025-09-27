@@ -28,7 +28,9 @@
   ],
   "author": "https://github.com/y-hiraoka",
   "repository": {
-    "url": "https://github.com/y-hiraoka/react-spotify-web-playback-sdk"
+    "type": "git",
+    "url": "https://github.com/y-hiraoka/react-spotify-web-playback-sdk",
+    "directory": "packages/react-spotify-web-playback-sdk"
   },
   "license": "MIT",
   "devDependencies": {
@@ -39,11 +41,6 @@
   },
   "peerDependencies": {
     "react": ">=16.8.0"
-  },
-  "peerDependenciesMeta": {
-    "@types/react": {
-      "optional": true
-    }
   },
   "dependencies": {
     "@types/spotify-web-playback-sdk": "^0.1.12"

@@ -7,9 +7,13 @@
     "test": "turbo run test",
     "test:ci": "turbo run test:ci",
     "check-types": "turbo run check-types",
-    "format": "prettier --write '**/*.{js,jsx,ts,tsx}'"
+    "format": "prettier --write '**/*.{js,jsx,ts,tsx}'",
+    "changeset": "changeset",
+    "changeset:publish": "turbo run build --filter='./packages/*' && changeset publish",
+    "changeset:version": "changeset version && pnpm install --lockfile-only"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.7",
     "@testing-library/react": "^16.3.0",
     "prettier": "^3.6.2",
     "tsup": "^8.5.0",
