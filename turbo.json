@@ -5,7 +5,8 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"],
-      "cache": false
+      "cache": false,
+      "env": ["SPOTIFY_CLIENT_ID", "SPOTIFY_CLIENT_SECRET"]
     },
     "check-types": {
       "cache": false
