@@ -15,7 +15,8 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "test": "jest"
+    "check-types": "tsc --noEmit",
+    "test": "vitest"
   },
   "keywords": [
     "react",
@@ -31,16 +32,10 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@testing-library/react": "^11.2.6",
-    "@testing-library/react-hooks": "^5.1.2",
-    "@types/jest": "^26.0.22",
     "@types/react": "^18.2.8",
     "@types/react-dom": "^18.2.4",
-    "jest": "^26.6.3",
     "react": "catalog:",
-    "react-dom": "catalog:",
-    "ts-jest": "^26.5.5",
-    "typescript": "^4.2.4"
+    "react-dom": "catalog:"
   },
   "peerDependencies": {
     "react": ">=16.8.0"

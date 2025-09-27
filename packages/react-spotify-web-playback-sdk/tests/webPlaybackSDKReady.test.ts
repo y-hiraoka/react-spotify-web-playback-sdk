@@ -1,24 +1,32 @@
-import { act, renderHook } from "@testing-library/react-hooks";
+import { test, expect, describe, it, vi } from "vitest";
+import { act, renderHook } from "@testing-library/react";
 import { MUST_BE_WRAPPED_MESSAGE } from "../src/constant";
 import {
   WebPlaybackSDKReadyProvider,
   useWebPlaybackSDKReady,
 } from "../src/webPlaybackSDKReady";
+import { setupMockSpotifyPlayer } from "./setup-spotify-mock";
 
-test("webPlaybackSDKReady", () => {
-  const { result } = renderHook(() => useWebPlaybackSDKReady(), {
-    wrapper: WebPlaybackSDKReadyProvider,
+describe("WebPlaybackSDKReady", () => {
+  const { makeSDKReady } = setupMockSpotifyPlayer();
+
+  it("should return false initially", () => {
+    vi.useFakeTimers();
+
+    const { result } = renderHook(() => useWebPlaybackSDKReady(), {
+      wrapper: WebPlaybackSDKReadyProvider,
+    });
+
+    expect(result.current).toBe(false);
+
+    act(() => makeSDKReady());
+
+    expect(result.current).toBe(true);
   });
 
-  expect(result.current).toBe(false);
-
-  act(() => window.onSpotifyWebPlaybackSDKReady());
-
-  expect(result.current).toBe(true);
-});
-
-test("useWebPlaybackSDKReady is not wrapped with Provider", () => {
-  const { result } = renderHook(() => useWebPlaybackSDKReady());
-
-  expect(result.error).toEqual(Error(MUST_BE_WRAPPED_MESSAGE));
+  test("should throw an error if not wrapped in Provider", () => {
+    expect(() => renderHook(() => useWebPlaybackSDKReady())).toThrow(
+      Error(MUST_BE_WRAPPED_MESSAGE),
+    );
+  });
 });
