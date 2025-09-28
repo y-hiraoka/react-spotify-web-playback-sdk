@@ -1,3 +1,11 @@
 .root > :not(:first-child) {
   margin-top: 32px;
 }
+
+.warning {
+  font-size: 14px;
+}
+
+.warning a {
+  text-decoration: underline;
+}

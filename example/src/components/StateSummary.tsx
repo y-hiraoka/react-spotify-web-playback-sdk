@@ -6,7 +6,7 @@ type Props = {
   state: unknown;
 };
 
-export const StateSummary: React.VFC<Props> = memo(({ state, summary }) => {
+export const StateSummary: React.FC<Props> = memo(({ state, summary }) => {
   const [open, setOpen] = useState(true);
 
   return (

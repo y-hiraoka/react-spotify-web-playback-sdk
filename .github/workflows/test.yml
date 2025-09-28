@@ -15,8 +15,9 @@ jobs:
         node-version: [20, 22]
 
     env:
-      SPOTIFY_CLIENT_ID: "dummy-id"
-      SPOTIFY_CLIENT_SECRET: "dummy-secret"
+      AUTH_SPOTIFY_CLIENT_ID: "dummy-id"
+      AUTH_SPOTIFY_CLIENT_SECRET: "dummy-secret"
+      AUTH_SECRET: "dummy-auth-secret"
 
     steps:
       - uses: actions/checkout@v4

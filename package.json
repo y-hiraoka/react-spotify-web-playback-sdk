@@ -7,7 +7,7 @@
     "test": "turbo run test",
     "test:ci": "turbo run test:ci",
     "check-types": "turbo run check-types",
-    "format": "prettier --write '**/*.{js,jsx,ts,tsx}'",
+    "format": "prettier --write .",
     "changeset": "changeset",
     "changeset:publish": "turbo run build --filter='./packages/*' && changeset publish",
     "changeset:version": "changeset version && pnpm install --lockfile-only"
