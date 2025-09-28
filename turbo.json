@@ -7,8 +7,8 @@
       "outputs": [".next/**", "!.next/cache/**"],
       "cache": false,
       "env": [
-        "AUTH_SPOTIFY_CLIENT_ID,",
-        "AUTH_SPOTIFY_CLIENT_SECRET,",
+        "AUTH_SPOTIFY_CLIENT_ID",
+        "AUTH_SPOTIFY_CLIENT_SECRET",
         "AUTH_SECRET"
       ]
     },
