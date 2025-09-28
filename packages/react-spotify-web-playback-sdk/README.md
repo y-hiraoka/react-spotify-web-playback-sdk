@@ -35,14 +35,15 @@ import { WebPlaybackSDK } from "react-spotify-web-playback-sdk";
 
 const AUTH_TOKEN = "your token here!";
 
-const MySpotifyPlayer: React.VFC = () => {
-  const getOAuthToken = useCallback(callback => callback(AUTH_TOKEN), []);
+const MySpotifyPlayer: React.FC = () => {
+  const getOAuthToken = useCallback((callback) => callback(AUTH_TOKEN), []);
 
   return (
     <WebPlaybackSDK
       initialDeviceName="My awesome Spotify app"
       getOAuthToken={getOAuthToken}
-      initialVolume={0.5}>
+      initialVolume={0.5}
+    >
       {/* `TogglePlay` and `SongTitle` will be defined later. */}
       <TogglePlay />
       <SongTitle />
@@ -66,7 +67,7 @@ Gets the playback status. For example, there are properties such as whether it i
 ```tsx
 import { usePlaybackState } from "react-spotify-web-playback-sdk";
 
-const SongTitle: React.VFC = () => {
+const SongTitle: React.FC = () => {
   const playbackState = usePlaybackState();
 
   if (playbackState === null) return null;
@@ -102,7 +103,7 @@ The custom hooks included in the library will not work unless they are inside th
 
 ```tsx
 const MyPlayer = () => {
-  const getOAuthToken = useCallback(callback => {
+  const getOAuthToken = useCallback((callback) => {
     const token = fetchNewSpotifyToken();
     callback(token);
   }, []);
@@ -112,7 +113,8 @@ const MyPlayer = () => {
       initialDeviceName="My Spotify App"
       getOAuthToken={getOAuthToken}
       initialVolume={0.5}
-      connectOnInitialized={true}>
+      connectOnInitialized={true}
+    >
       <SomeComponentsUsingCustomHook />
     </WebPlaybackSDK>
   );
@@ -186,7 +188,7 @@ function usePlaybackState(
 #### usage
 
 ```tsx
-const SongTitle: React.VFC = () => {
+const SongTitle: React.FC = () => {
   const playbackState = usePlaybackState();
 
   if (playbackState === null) return null;

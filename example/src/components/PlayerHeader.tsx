@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { useSpotifyPlayer } from "react-spotify-web-playback-sdk";
 import styles from "./PlayerHeader.module.css";
 import { TextInput } from "./TextInput";
+import logoSmall from "./logo-small.png";
+import Image from "next/image";
 
-export const PlayerHeader: React.VFC = () => {
+export const PlayerHeader: React.FC = () => {
   const [deviceName, setDeviceName] = useState("Spotify Player on Next.js");
 
   const spotifyPlayer = useSpotifyPlayer();
@@ -16,9 +18,9 @@ export const PlayerHeader: React.VFC = () => {
     <header className={styles.header}>
       <div className={styles.headerTop}>
         <div className={styles.headerLeft}>
-          <img
+          <Image
             className={styles.smallLogo}
-            src="/logo-small.png"
+            src={logoSmall}
             alt="small logo"
           />
           <div className={styles.deviceNameTop}>

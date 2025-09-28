@@ -33,14 +33,15 @@ import { WebPlaybackSDK } from "react-spotify-web-playback-sdk";
 
 const AUTH_TOKEN = "your token here!";
 
-const MySpotifyPlayer: React.VFC = () => {
-  const getOAuthToken = useCallback(callback => callback(AUTH_TOKEN), []);
+const MySpotifyPlayer: React.FC = () => {
+  const getOAuthToken = useCallback((callback) => callback(AUTH_TOKEN), []);
 
   return (
     <WebPlaybackSDK
       deviceName="My awesome Spotify app"
       getOAuthToken={getOAuthToken}
-      volume={0.5}>
+      volume={0.5}
+    >
       {/* `TogglePlay` and `SongTitle` will be defined later. */}
       <TogglePlay />
       <SongTitle />
@@ -62,7 +63,7 @@ Spotify プレイヤーのインスタンスを取得します。インスタン
 ```tsx
 import { useSpotifyPlayer } from "react-spotify-web-playback-sdk";
 
-const TogglePlay: React.VFC = () => {
+const TogglePlay: React.FC = () => {
   const player = useSpotifyPlayer();
 
   if (player === null) return null;
@@ -81,7 +82,7 @@ SDK のセットアップが完了していない間は null が返されるた�
 ```tsx
 import { usePlaybackState } from "react-spotify-web-playback-sdk";
 
-const SongTitle: React.VFC = () => {
+const SongTitle: React.FC = () => {
   const playbackState = usePlaybackState();
 
   if (playbackState === null) return null;
@@ -117,7 +118,7 @@ SDK をラップした React コンポーネントです。これは React-Naiti
 
 ```tsx
 const MyPlayer = () => {
-  const getOAuthToken = useCallback(callback => {
+  const getOAuthToken = useCallback((callback) => {
     const token = fetchNewSpotifyToken();
     callback(token);
   }, []);
@@ -127,7 +128,8 @@ const MyPlayer = () => {
       deviceName="My Spotify App"
       getOAuthToken={getOAuthToken}
       volume={0.5}
-      connectOnInitialized={true}>
+      connectOnInitialized={true}
+    >
       <SomeComponentsUsingCustomHook />
     </WebPlaybackSDK>
   );
@@ -201,7 +203,7 @@ function usePlaybackState(
 #### 使用例
 
 ```tsx
-const SongTitle: React.VFC = () => {
+const SongTitle: React.FC = () => {
   const playbackState = usePlaybackState();
 
   if (playbackState === null) return null;

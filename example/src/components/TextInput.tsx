@@ -7,7 +7,7 @@ type Props = {
   placeholder: string;
 };
 
-export const TextInput: React.VFC<Props> = ({
+export const TextInput: React.FC<Props> = ({
   value,
   onChange,
   placeholder,

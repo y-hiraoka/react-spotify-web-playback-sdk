@@ -1,8 +1,9 @@
 import { memo } from "react";
 import { useSpotifyPlayer } from "react-spotify-web-playback-sdk";
 import styles from "./PlayerController.module.css";
+import { signOut } from "next-auth/react";
 
-export const PlayerController: React.VFC = memo(() => {
+export const PlayerController: React.FC = memo(() => {
   const player = useSpotifyPlayer();
 
   if (player === null) return null;
@@ -28,11 +29,20 @@ export const PlayerController: React.VFC = memo(() => {
         <button className={styles.action} onClick={() => player.resume()}>
           <code>player.resume</code>
         </button>
+        <button
+          className={styles.action}
+          onClick={() => player.activateElement()}
+        >
+          <code>player.activateElement</code>
+        </button>
         <button className={styles.action} onClick={() => player.connect()}>
           <code>player.connect</code>
         </button>
         <button className={styles.action} onClick={() => player.disconnect()}>
           <code>player.disconnect</code>
+        </button>
+        <button className={styles.action} onClick={() => signOut()}>
+          <code>sign out</code>
         </button>
       </div>
     </div>
